@@ -1,6 +1,6 @@
 # py--
 
-- decompress `py--` script at runtime into javascript
+- decompress `py--` scripts at runtime into javascript
 - includes mini transpiler with user defined macro syntax
 - defines smaller CSS and DOM API
 
@@ -46,7 +46,44 @@ js translation:
 ```javascript
 var a =[1,2,3]
 for(i=0;i<a.length;i++){
-	console.log('index', i)
-	console.log('value', a[i])
+console.log('index', i)
+console.log('value', a[i])
+}
+```
+
+## syntax: if elif else
+RULE: `if CONDITION`
+- terminates with blank line
+- elif and else follow without a blank line
+- nested if requires a blank line inside the nested block
+- note for python devs: do not end with `:`
+
+py--
+```python
+if a
+	console.log(a)
+elif b
+	if b==1
+		console.log('foo')
+	else
+		console.log(b)
+
+else
+	console.log('bar')
+
+```
+js translation:
+```javascript
+if(a){
+console.log(a)
+}
+}else if (b){
+if(b==1){
+console.log('foo')
+}else{
+console.log(b)
+}
+}else{
+console.log('bar')
 }
 ```
