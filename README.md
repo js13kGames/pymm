@@ -87,3 +87,42 @@ console.log(b)
 console.log('bar')
 }
 ```
+
+## macro replace syntax: `# VARS VALUES`
+RULE: `define single letters and replacement values`
+- macros are cleared with `#` on a new line
+- no spaces in values
+- example: `# ABC some.a some.b some.c`
+
+py--
+```python
+# P console.log
+if a
+	P(a)
+elif b
+	if b==1
+		P('foo')
+	else
+		P(b)
+
+else
+	P('bar')
+
+```
+js translation:
+```javascript
+if(a){
+console.log(a)
+}
+}else if (b){
+if(b==1){
+console.log('foo')
+}else{
+console.log(b)
+}
+}else{
+console.log('bar')
+}
+```
+
+
