@@ -16,11 +16,12 @@ C='continue'
 /// note: MMD is the dynamic part of pymm translator
 /// first define it as an empty string
 $MMD=""
+$oid=0
 /// note: eval is used directly below to capture local variables
 $S[P$].pymm=function(){
 	var $=this.split('\n'), __=[],q=0,_,t,ms={}
-	for(i=0;i<$L($);i++){
-		_=$[i];T=_.trim().split(' ');t=T[0];
+	for(var _i=0;_i<$L($);_i++){
+		_=$[_i];T=_.trim().split(' ');t=T[0];
 		eval($MMD)
 		if(t.endsWith('='))_='var '+_
 		if(t=='#'){
@@ -31,11 +32,10 @@ $S[P$].pymm=function(){
 			q=0
 			continue
 		}
-		for(n in ms)_=_.$r(n,ms[n])
-		js=_.$r('^',";break} case ").$r('~',C)
+		for(var n in ms)_=_.$r(n,ms[n])
+		js=_.$r('~',C)
 		__.push(js)
 	}
-	console.log(__.join('\n'))
 	return __.join('\n')
 }
 /// now that pymm is defined, extend the definition of $MDD
@@ -50,20 +50,29 @@ A@'){
 	k='@ '
 	I='i'
 	if($L(T)>2){I=T[1];k+=I}
-	_=_.$r(k,"for("+I+"=0;"+I+"<$L(")+");"+I+"++){"
+	_=_.$r(k,"for(var "+I+"=0;"+I+"<$L(")+");"+I+"++){"
 }
-if(_[0]=='B\u0001',F$+' ')+'{';q++}
+if(_[0]=='B\u0001',F$+' ')+'{';q++;$oid=0}
 A<<B<<',R)}
 `.pymm()
 
 /// define low level macro replace function
 $m=(a,b)=>$E(("# "+a+'\n'+b+'\n#').pymm())
 
-$m("Q?FR $S[P$]. this.sth( "+F$+ " ){"+R,
-`Qsw=F(a,b,cR ?a)||?b)||?c)}
+$m("QFR $S[P$]. "+F$+ " ){"+R,
+`Qsw=F(a){
+	a= a.split(' ')
+	r= 0
+	@ a
+		if this.sth(a[i])
+			r++
+
+
+	<< r
+}
 Qcount=F(a='\t'R $L(this.sit(a))-1}
 Qlines=F(a,bR this.sit('\\n')}
-Qwords=F(R this.replace(/([a-z])([A-Z])/g, '$1 $2').split(' ')}
+Qwords=F(R this.replace(/([a-z])([A-Z])/g, '$1 $2').$r('-', ' ').split(' ')}
 `)
 
 /// bootstrap smaller String API
@@ -80,6 +89,41 @@ $m("A $S[P$]",$SS)
 $m("A $S",$SS)
 
 chr=(a)=>$S.fde(a)
+ord=(a)=>a.charCodeAt(0)
+
+$MMD+= `
+if t==':'
+	ks= T[1]
+	vs= T.slice(2,$L(T))
+	if ks.iOf(',')!=-1
+		if ks.iOf('|')!=-1
+			[ka,kb]= ks.split('|')
+			ks=ka.split('').concat(kb.split(','))
+		else
+			ks=ks.split(',')
+
+	elif $L(vs)==1
+		vs=vs[0]
+
+	d= '$save(o'+$oid+'={'
+	$oid++
+	@ ks
+		kc= ks[i]
+		vl= vs[i]
+		if vl==undefined
+			if kc.endsWith('s')
+				vl='[]'
+			elif kc.iOf('t')!=-1
+				vl='""'
+			else
+				vl='0'
+
+
+		d+=kc+':'+vl+','
+
+	_=d.substr(0,$L(d)-1)+'})'
+
+`.pymm()
 
 M=Math
 $R=(a=1)=>M.random()*a
@@ -89,7 +133,6 @@ $MF=(a)=>M.floor(a)
 
 
 $cs=[]
-$css=[]
 $EL=Element
 $m("ABF a=n.str( if(a==' "+F$,
 `
@@ -101,15 +144,9 @@ for(n in $D.body.style){
 	a+=n[l-1]
 	if(n.iOf('-')!=-1||$cs.indexOf(a)!=-1)~
 	$cs.push(a)
-	w=n.words()
-	@ w
-		if($css.indexOf(w[i])!=-1)~
-		$css.push(w[i])
-
 	b='this.style.'+n
 	$EL[P$]['$'+a]=$E("(F $(s){if(s)"+b+"=s;return "+b+"})")
 }
-$css.sort()
 `)
 
 $py=(s)=>s.$r('@','for i in range(len(').$r(_$S_,'def ')
@@ -117,6 +154,10 @@ $py=(s)=>s.$r('@','for i in range(len(').$r(_$S_,'def ')
 $m('QUXF "rgba("+ this.$bacd("linear-gradient("+ +","+ '+F$,
 `
 $EL[P$].clr=F(a,d=0,f=1){
+	if typeof(a)=='string'
+		this.$bacr(a)
+		<<
+
 	if a[3]<=0.4
 		this.$filr('blur(5px)')
 
@@ -130,6 +171,17 @@ $EL[P$].clr=F(a,d=0,f=1){
 		this.$bacr(c)
 
 }`)
+
+$t=`$T=function(){
+	r= []
+	@ A
+		r.push($("T",A[i],1))
+
+	<< r[0]
+}`
+
+f=(t)=>$m('TA '+t+' arguments',$t);
+'a hr div code span pre svg'.split(' ').forEach(f)
 
 $DO=Document
 }
