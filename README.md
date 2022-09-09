@@ -19,6 +19,7 @@ var a= b
 ## syntax: global variables
 RULE: a space before equals is assignment to a global variable.
 RULE: or no spaces at all is assignment to a global
+
 py--
 ```python
 a =b
@@ -130,15 +131,48 @@ console.log('bar')
 ## object init syntax: `: KEYS VALUES`
 RULE: `define keys as single letters or words using ","`
 - objects constructed with this syntax also have all their values saved to another object, so you can call `$reset(o)` to restore the original state
-
+- note: single byte values do not need spaces
+- automatic capture variables: `oN` where `N` in the order as written from the start of a function. This helps when you create many objects passed into some function call, and you still need to reference those objects after.
 
 py--
 ```python
 myob=
-: xyz 123
+	: xyz 123
+myfunc(
+	: xyz 10 20 30
+)
 ```
 js translation:
 ```javascript
 var myob=
-$save({x:1,y:2,z:3})
+	$save(o0={x:1,y:2,z:3})
+myfunc(
+	$save(o1={x:10,y:20,z:30})
+)
 ```
+
+## object init syntax: defaults
+RULE: for values not given after the keys, automatic defaults are assigned based on naming of the keys
+- key names ending with `s` default to `[]`
+- if the letter `t` is in the key name, the default is ""
+- all others default to `0`
+
+py--
+```python
+myob= myfunction(
+: foos,txt,x,y,z
+)
+mydata= o0
+```
+js translation:
+```javascript
+var myob=myfunction(
+	$save(o0={foos:[],txt:"",x:0,y:0,z:0})
+)
+var mydata= o0
+```
+
+## object init syntax: keys
+- `,` is not required for keys that are all single letters
+- when you have mixed single keys and long key names, use format 'longnames|singles'
+- example: `: foo,bar|xyz`

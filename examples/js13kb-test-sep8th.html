@@ -91,7 +91,7 @@ vs= T.slice(2,$L(T))
 if ks.iOf(',')!=-1
 if ks.iOf('|')!=-1
 [ka,kb]= ks.split('|')
-ks=ka.split('').concat(kb.split(','))
+ks=ka.split(',').concat(kb.split(''))
 else
 ks=ks.split(',')
 
@@ -180,10 +180,10 @@ $DO=Document
 }
 
 $art=()=>{
-$pl=$sarr("v/-.___.-|()n==-.-----,/__/[dD]`#######-.,,,,,,,.-T@O7---\\K\\7")
+$pl=$sarr("v/-.___.-|()n==-.-----,/__/[dD]`#######-.,,,,,,,.-T@O7---\\7K\\")
 $cpal=[[204,11,8,1.0],[255,242,227,1.0],[98,6,4,1.0],[255,25,23,0.7],[20,43,98,1.0],[31,65,151,1.0],[9,18,41,1.0],[2,1,2,0.4],[0,0,0,1.0]];
 
-$pk="<751;&/	;^D?5#	8<	2:'J3&_!&M[VTU3KW&QW0Z$B3";
+$pk="<751;&/	;^D?5#	8<	2:'J3&_!&M[VQW0Z$U3KW&B3T";
 $cir="|r)S%S)/URQJ PUS)XV]O%+IGhYJ)YnXIG0X$LE/1'!I):5 $?	>1";
 $tree={
 "2s"/*LEG*/:"&/7%5@%:C0Q8R@R/V	9V	BV	",
@@ -250,7 +250,7 @@ $W.add(c,d)
 # ABC $f($[i $uf($[i {x:x,y:y,
 $$($,$P,al,st=4)
 r= []
-for(i=0;i < $L($);i+=st){
+for(i=0;i<$L($);i+=st){
 if $[i]==chr(92)
 $P=al
 st=4;~
@@ -328,7 +328,7 @@ if(f)$D.qur('#CAM').apd(e)
 
 # AH .apd($code( $div(pi)
 $BOT(b,c,cp,sp,x=300,y=300)
-: xyzr|arms,state,jump,fx,fz x y 1 0 [0,0]
+: arms,state|xyzXZjr [0,0] "" x y 1
 ob= o0
 ob.chat=$code(
 : xywhsct 50 -80 160 80 16 'white'
@@ -480,18 +480,16 @@ $minscl+=0.3
 $maxscl=0.9
 genground(hit.h)
 <<
-else
-hit.x=false;hit.y=false
 
 elif o.over!=1
 o.x-=30
 o.x-=o.z*3
-o.fx=-0.4
+o.X=-0.4
 o.g=1
 if o.z>1
 o.x-=100
 elif o.z<0.3
-o.jump+=80
+o.j+=80
 
 
 
@@ -545,19 +543,19 @@ ds[i].$tram('rotate('+$MF($R(10)-5)+'deg)')
 
 
 @ $legs
-r= ($R()-0.5)*(o.fx+(o.fz*10))*100
+r= ($R()-0.5)*(o.X+(o.Z*10))*100
 $legs[i].$tram("rotateZ(" +$MF(r) + "deg)")
 
 mv= $R(20)
 if !(hit.x&&hit.y)
 if o.over!=1
-o.x+=o.fx*50
+o.x+=o.X*50
 o.x-=$R(o.r*0.4)
 
 
-o.z+=o.fz*0.5
+o.z+=o.Z*0.5
 if o.r
-o.jump += $R(o.r)
+o.j += $R(o.r)
 
 if(o.z<$minscl)o.z=$minscl
 if(o.z>$maxscl)o.z=$maxscl
@@ -570,37 +568,37 @@ if o.x < -20
 o.x = -20
 o.state ="r"
 
-o.jump = mv * 2
+o.j = mv * 2
 elif o.state=='r'
 o.x +=mv
-o.jump =mv * 2
+o.j =mv * 2
 
 e.$left(o.x)
 tra+=' scaleY('+M+')'
-if(o.state=="s") e.$topp(o.y-o.jump+$R(40));
-else e.$topp(o.y - o.jump);
-tra+=' rotateY('+(o.fx*$R(50))+'deg)'
+if(o.state=="s") e.$topp(o.y-o.j+$R(40));
+else e.$topp(o.y - o.j);
+tra+=' rotateY('+(o.X*$R(50))+'deg)'
 if o.r
 tra+=' skew('+(o.r+$R(o.r/2))+'deg)'
 elif o.state=='q'
 tra+=' skewY(30'+$R()+'deg)'
 
 e.$tram(tra)
-$arms[0].$tram('rotate('+( (o.jump*0.75)+o.arms[0] )+'deg)')
-$arms[1].$tram('rotate('+( (-o.jump*0.75)+o.arms[1] )+'deg)')
-o.jump*=0.7
-o.fx*=0.8
-o.fz*=0.8
+$arms[0].$tram('rotate('+( (o.j*0.75)+o.arms[0] )+'deg)')
+$arms[1].$tram('rotate('+( (-o.j*0.75)+o.arms[1] )+'deg)')
+o.j*=0.7
+o.X*=0.8
+o.Z*=0.8
 
-# SJAB state=" jump= arms[0] arms[1]
+# SJAB state=" j= arms[0] arms[1]
 $actions={
-a:'Sl"\\nfx=-1',
-w:'J100\\nfz=-0.2',
-s:'Ss"\\nfx=0\\nfz=0.1\\nJ30',
-d:'Sr"\\nfx=1',
-z:'fz=-0.5',
-q:'J100\\nfx-=0.5',
-e:'J100\\nfx+=0.5',
+a:'Sl"\\nX=-1',
+w:'J100\\nZ=-0.2',
+s:'Ss"\\nX=0\\nZ=0.1\\nJ30',
+d:'Sr"\\nX=1',
+z:'Z=-0.5',
+q:'J100\\nX-=0.5',
+e:'J100\\nX+=0.5',
 o:'A-=4',
 p:'A+=4',
 k:'B+=4',
@@ -660,4 +658,4 @@ setTimeout(init, 1000)
 <body>
 <input id="P1"/>
 <div id="CAM" style="height:500;position:relative;overflow:hidden;background-color:red"></div>
-<h1>raw bytes: 9663</h1><h1>zip kilobytes: 5.5</h1></body></html>
+<h1>raw bytes: 9579</h1><h1>zip kilobytes: 5.4</h1></body></html>

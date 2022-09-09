@@ -98,7 +98,7 @@ if t==':'
 	if ks.iOf(',')!=-1
 		if ks.iOf('|')!=-1
 			[ka,kb]= ks.split('|')
-			ks=ka.split('').concat(kb.split(','))
+			ks=ka.split(',').concat(kb.split(''))
 		else
 			ks=ks.split(',')
 
