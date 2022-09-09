@@ -181,7 +181,7 @@ $t=`$T=function(){
 }`
 
 f=(t)=>$m('TA '+t+' arguments',$t);
-'a hr div code span pre svg'.split(' ').forEach(f)
+'a hr div code span pre'.split(' ').forEach(f)
 
 $DO=Document
 }

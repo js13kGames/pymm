@@ -174,16 +174,16 @@ r.push($("T",A[i],1))
 }`
 
 f=(t)=>$m('TA '+t+' arguments',$t);
-'a hr div code span pre svg'.split(' ').forEach(f)
+'a hr div code span pre'.split(' ').forEach(f)
 
 $DO=Document
 }
 
 $art=()=>{
-$pl=$sarr("v/-.___.-|()n==-.-----,/__/[dD]`#######-.,,,,,,,.-T@O7---\\7K\\")
+$pl=$sarr("v/-.___.-|()n==-.-----,/__/[dD]`#######-.,,,,,,,.-T@O7---K\\\\7")
 $cpal=[[204,11,8,1.0],[255,242,227,1.0],[98,6,4,1.0],[255,25,23,0.7],[20,43,98,1.0],[31,65,151,1.0],[9,18,41,1.0],[2,1,2,0.4],[0,0,0,1.0]];
 
-$pk="<751;&/	;^D?5#	8<	2:'J3&_!&M[VQW0Z$U3KW&B3T";
+$pk="<751;&/	;^D?5#	8<	2:'J3&_!&M[VW0KW&TQB3U3Z$";
 $cir="|r)S%S)/URQJ PUS)XV]O%+IGhYJ)YnXIG0X$LE/1'!I):5 $?	>1";
 $tree={
 "2s"/*LEG*/:"&/7%5@%:C0Q8R@R/V	9V	BV	",
@@ -229,6 +229,11 @@ $f=(i)=>_I-60
 $uf=(i)=>_I
 _$S_=_[0]
 #
+
+$svg(n,v)
+n= $D.createElementNS("http://www.w3.org/2000/svg",n)
+for(var p in v)n.setAttributeNS(null, p, v[p]);
+<< n
 
 $mem= []
 $save(a)
@@ -378,13 +383,19 @@ rt.apd(ob.chat)
 choice(a)
 << a[$MF($R($L(a)-1))]
 
+range(n)
+r= []
+for(i=0;i<n;i++)r.push(i);
+<< r
+
+#
 $gen1()
 $a(
 : xystl 820 35 20 "MoonBird_NFT" "opensea.io/Quantumpoetic"
 ,
 : xystl 20 55 30 "py--" "gitlab.com/pythonmm/pymm"
 ,
-: xystl 820 55 20 "JS13KB_2022" "https://js13kgames.com/entries/2022"
+: xystl 820 55 20 "JS13KB_2022" "js13kgames.com/entries/2022"
 )
 pre= $pre(
 : xyst 132 32 9 'moon'
@@ -418,7 +429,7 @@ xx+=5
 
 
 
-
+#
 $gen2()
 $lig=$div(
 : xywhcb 400 200 300 300 'white' 60
@@ -430,6 +441,60 @@ $lig.soft=$div(
 $col=$div(
 : xywhc 400 200 100 100 'blue'
 )
+bg=$svg("svg")
+bg.style.width='100%'
+bg.style.height='100%'
+$D.qur('#CAM').apd(bg)
+r= $svg('rect',{x:10,y:10,width: 100, height: 20, fill:'#ff00ff' });
+bg.apd(r)
+r= $svg('rect', { x: 20, y: 40, width: 100, height: 40, rx:20, ry:20, fill: 'pink', stroke:'black', strokeWidth:12 });
+bg.apd(r)
+g= $svg('g', {fill:'green',stroke:'black'})
+bg.apd(g)
+@ range(10)
+d= 'M'
+@ j range(16)
+if j==2
+d+='c'
+
+d+=($R(100)+(i*100) )+' '
+d+=($R(100)+(j*0.4) )+' '
+
+d=d.tim()+'z'
+p= $svg('path',{d:d})
+g.apd(p)
+
+g= $svg('g', {fill:'black',stroke:'grey',rx:8,ry:8,strokeWidth:40})
+bg.apd(g)
+@ range(10)
+d= 'M'
+@ j range(16)
+if j==2
+d+='c'
+
+d+=($R(100)+(i*100) )+' '
+d+=($R(100)+(j*0.4)+300 )+' '
+
+d=d.tim()+'z'
+p= $svg('path',{d:d})
+g.apd(p)
+
+@ j range(40)
+@ range(40)
+r= $svg('rect',{rx:$R(20),ry:$R(20),x:$R(j+10)+(i*60),y:$R(10)+$R(j)+300,width:$R(100),height:$R(200),fill:'rgba(55,255,55,0.1)'});
+bg.apd(r)
+
+
+@ j range(40)
+@ range(40)
+r= $svg('rect',{rx:$R(20),ry:$R(20),x:$R(j+10)+(i*60),y:$R(10)+$R(j),width:$R(100),height:$R(20),fill:'rgba(255,255,255,0.1)'});
+bg.apd(r)
+
+
+
+
+
+
 
 
 #
@@ -461,7 +526,7 @@ b= $('b',{x:x,y:h-30,w:128,h:7,c:'cyan',},1)
 x+=132
 
 
-
+rebuild=[]
 $minscl=0.1
 $maxscl=3
 $0=0
@@ -469,6 +534,9 @@ $1=0
 $loop()
 o= $BIRD
 e= o.$
+if $L(rebuild)&&$R()<0.01
+e.apd(rebuild.pop())
+
 hit= overlaps(e,$col)
 if hit.x
 if hit.over>0
@@ -488,6 +556,12 @@ o.X=-0.4
 o.g=1
 if o.z>1
 o.x-=100
+$col.x+=$R(10)-2
+$col.$left($col.x)
+if e.lastChild
+rebuild.push(e.lastChild)
+e.removeChild(e.lastChild)
+
 elif o.z<0.3
 o.j+=80
 
@@ -642,7 +716,7 @@ function init() {
 	$PYMM()
 // serious bug here, setting fontFamily on body ahead of PYMM breaks init
 	$D.body.$Familyy("system-ui")
-	$D.body.clr('gray')
+	$D.body.clr('tan')
 	$js=$p.pymm()
 	$E($js)
 	$dom()
@@ -657,5 +731,5 @@ setTimeout(init, 1000)
 </head>
 <body>
 <input id="P1"/>
-<div id="CAM" style="height:500;position:relative;overflow:hidden;background-color:red"></div>
-<h1>raw bytes: 9579</h1><h1>zip kilobytes: 5.4</h1></body></html>
+<div id="CAM" style="height:500;position:relative;overflow:hidden;background-image:linear-gradient(0deg,black,transparent)"></div>
+<h1>raw bytes: 11000</h1><h1>zip kilobytes: 6.2</h1></body></html>
